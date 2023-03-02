@@ -1,0 +1,67 @@
+﻿@page "{FacultyID}"
+@using System.Data.SqlClient;
+@using NewLab1.Pages.DB;
+@model NewLab1.Pages.OfficeHourSch.OfficeHourPageTeacherModel
+@{
+}
+@{
+    <p>Phillip Ruta, Anuj Passan, Arden Barrett</p>
+
+    //testing the user is logged in to see the pages
+    if (HttpContext.Session.GetString("username") != null)
+    {
+
+
+        @*Table for displaying office hours*@
+
+
+
+        <table class="table table-bordered table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th>Office Number:</th>
+                    <th>Date: </th>
+                    <th>Time: </th>
+                    <th>Student Name:</th>
+                    <th>             </th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            
+            
+            
+            @{
+
+
+                   //foreach loop to get data from sql database
+                    foreach (var officeHours in Model.Hours)
+                    {
+                        <tr>
+                            <td class="text-danger">@officeHours.OfficeNumber</td>       
+                            <td>@officeHours.Date</td>
+                            <td>@officeHours.Time</td>
+                            <td>@officeHours.StudentName</td>
+                            <td> <a asp-page="EditStudents" class="btn btn-primary" asp-route-officehourID="@officeHours.OfficeHourID">Edit Students</a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+        <a href="/OfficeHourSch/AddOfficeHours">Add Office Hours</a>
+
+
+    }
+
+    <br />
+            //A link to the view meetings query table
+   // <p>To View the Current Meetings Scheduled Click here! <a href="http://localhost:5219/OfficeHourSch/ViewMeeting"> View Meetings</a>.</p>
+    <p>Ready to meet? </p>
+    <a id="myLink" href="http://localhost:5183/OfficeHourSch/HashedLogin" style="display:none;"></a>
+    <button type="button" class="btn btn-primary position-relative" onclick="document.getElementById('myLink').click()">
+        Notify Student
+
+    </button>
+
+}
