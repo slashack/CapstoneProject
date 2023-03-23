@@ -43,8 +43,8 @@ namespace NewLab1.Pages.OfficeHourSch
                         OfficeNumber = int.Parse(SingleReader["office#"].ToString()),
                         Time = SingleReader["timeID"].ToString(),
                         Date = SingleReader["dateID"].ToString(),
-                        FacultyID = currentFacultyID,
                         StudentName = SingleReader["studentName"].ToString(),
+                        FacultyID = currentFacultyID
                     });
                 }
             }

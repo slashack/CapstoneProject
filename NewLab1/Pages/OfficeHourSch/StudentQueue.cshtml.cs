@@ -34,7 +34,7 @@ namespace NewLab1.Pages.OfficeHourSch
                     QueueList.Add(new Queue
                     {
                         QueueID = int.Parse(SingleReader["QueueID"].ToString()),
-                        QueueOrder = int.Parse(SingleReader["QueueOrder"].ToString()),
+                      
                         StudentID = currentStudentID,
                         FacultyID = int.Parse(SingleReader["facultyID"].ToString()),
 

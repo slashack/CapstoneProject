@@ -2,14 +2,17 @@
 @model NewLab1.Pages.OfficeHourSch.AddOfficeHoursModel
 @{
 }
+@if (HttpContext.Session.GetString("username") != null)
+    {
 
 <form asp-page="AddOfficeHourss">
-    <input asp-for="NewOfficeHours.OfficeNumber" placeholder="Office Number" />
+        <input asp-for="NewOfficeHours.OfficeNumber" placeholder="Office Number" />
     <input asp-for="NewOfficeHours.Date" placeholder="Date" />
     <input asp-for="NewOfficeHours.Time" placeholder="Time" />
-    <input asp-for="NewOfficeHours.FacultyID" placeholder="FacultyID" />
     <br />
-    <input type="submit" value="Add New Office Hours->" <input />
+    <input type="submit" value="Add New Office Hours->" input/>
     <a asp-page="Index">Cancel</a>
 
 </form>
+    }
+    

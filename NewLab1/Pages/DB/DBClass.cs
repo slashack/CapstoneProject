@@ -6,6 +6,7 @@ namespace NewLab1.Pages.DB
 {
     public class DBClass
     {
+
         // Connection at the Class Level
         public static SqlConnection Lab3DBConnection = new SqlConnection();
 
@@ -13,7 +14,6 @@ namespace NewLab1.Pages.DB
         // Connection String 
         private static readonly String? Lab3DBConnString = "Server=Localhost;Database=Lab3;Trusted_Connection=True";
         private static readonly String? AuthConnString = "Server=Localhost;Database=AUTH;Trusted_Connection=True";
-
 
         //Sql Connection to get data from the faculty table 
         public static SqlDataReader FacultyReader()
@@ -38,7 +38,7 @@ namespace NewLab1.Pages.DB
             SqlCommand cmdProductRead = new SqlCommand();
             cmdProductRead.Connection = Lab3DBConnection;
             cmdProductRead.Connection.ConnectionString = Lab3DBConnString;
-            cmdProductRead.CommandText = "SELECT * FROM Queue";
+            cmdProductRead.CommandText = "SELECT * FROM QueueData";
 
             cmdProductRead.Connection.Open();
 
@@ -63,7 +63,28 @@ namespace NewLab1.Pages.DB
             return tempReader;
 
         }
-       
+
+        
+        public static int IDFinder(string username)
+        {
+            // This method expects to receive an SQL SELECT
+            // query that uses the COUNT command.
+
+            SqlCommand cmdLogin = new SqlCommand();
+            cmdLogin.Connection = Lab3DBConnection;
+            cmdLogin.Connection.ConnectionString = Lab3DBConnString;
+            cmdLogin.CommandText = "SELECT facultyID FROM Faculty WHERE userName = '" + username + "'";
+            cmdLogin.Connection.Open();
+
+            // ExecuteScalar() returns back data type Object
+            // Use a typecast to convert this to an int.
+            // Method returns first column of first row.
+            int id = (int)cmdLogin.ExecuteScalar();
+
+            return id;
+           
+        }
+
 
         public static SqlDataReader SingleProductReader(int StudentID)
         {
@@ -160,7 +181,7 @@ namespace NewLab1.Pages.DB
             // ExecuteScalar() returns back data type Object
             // Use a typecast to convert this to an int.
             // Method returns first column of first row.
-            cmdLogin.ExecuteNonQuery();
+            cmdLogin.ExecuteNonQuery(); 
 
         }
 
@@ -194,7 +215,7 @@ namespace NewLab1.Pages.DB
             SqlCommand cmdProductRead = new SqlCommand();
             cmdProductRead.Connection = Lab3DBConnection;
             cmdProductRead.Connection.ConnectionString = Lab3DBConnString;
-            cmdProductRead.CommandText = "SELECT * FROM OfficeHours";
+            cmdProductRead.CommandText = "SELECT * FROM Officehours";
 
             cmdProductRead.Connection.Open();
 
@@ -413,6 +434,34 @@ namespace NewLab1.Pages.DB
 
 
 
+        }
+
+        public static void QueueCreate(int studentID, int facultyID, string queueName)
+        {
+
+
+            // Check if the queue exists
+            SqlCommand queueExistsCommand = new SqlCommand("SELECT COUNT(*) FROM QueueData WHERE Qname = @queueName AND QfacultyID = @facultyId");
+            queueExistsCommand.Connection.ConnectionString = Lab3DBConnString;          
+            queueExistsCommand.Connection.Open();
+            queueExistsCommand.Parameters.AddWithValue("@queueName", queueName);
+            queueExistsCommand.Parameters.AddWithValue("@facultyId", facultyID);
+            int queueCount = (int)queueExistsCommand.ExecuteScalar();
+
+            if (queueCount == 0)
+            {
+                // The queue does not exist, create it
+                SqlCommand createQueueCommand = new SqlCommand("INSERT INTO QueueData (Qname, QfacultyID) VALUES (@queueName, @facultyId)");
+                createQueueCommand.Parameters.AddWithValue("@queueName", queueName);
+                createQueueCommand.Parameters.AddWithValue("@facultyId", facultyID);
+                createQueueCommand.ExecuteNonQuery();
+            }
+
+            SqlCommand addStudentCommand = new SqlCommand("INSERT INTO QueueData (Qname, QstudentID, QfacultyID) VALUES (@queueName, @studentId, @facultyId)");
+            addStudentCommand.Parameters.AddWithValue("@queueName", queueName);
+            addStudentCommand.Parameters.AddWithValue("@studentId", studentID);
+            addStudentCommand.Parameters.AddWithValue("@facultyId", facultyID);
+            addStudentCommand.ExecuteNonQuery();
         }
     }
 }

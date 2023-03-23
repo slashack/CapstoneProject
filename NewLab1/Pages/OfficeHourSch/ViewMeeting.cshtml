@@ -4,9 +4,9 @@
 @model NewLab1.Pages.OfficeHourSch.ViewMeetingModel
 @{
 }
-@{
-    //Used to check if the user has access to this page
-    if (HttpContext.Session.GetString("username") != null)
+
+    
+    @if (HttpContext.Session.GetString("username") != null)
     {
 
         //Changing the color of the text

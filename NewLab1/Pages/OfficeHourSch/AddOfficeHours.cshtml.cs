@@ -20,6 +20,9 @@ namespace NewLab1.Pages.OfficeHourSch
 
         public IActionResult OnPost()
         {
+            //find faculty ID
+            NewOfficeHours.FacultyID = DBClass.IDFinder(HttpContext.Session.GetString("username"));
+            DBClass.Lab3DBConnection.Close();
             // Call the InsertOffice method to update the data
             DBClass.InsertOffice(NewOfficeHours.OfficeNumber, NewOfficeHours.Date, NewOfficeHours.Time, NewOfficeHours.FacultyID);
 

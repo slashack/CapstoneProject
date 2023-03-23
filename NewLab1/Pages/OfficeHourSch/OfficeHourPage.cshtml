@@ -1,38 +1,38 @@
 ﻿@page 
 @model NewLab1.Pages.OfficeHourSch.OfficeHourPageModel
 @{
-   
+
     //testing the user is logged in to see the pages
-      
+
     <a id="myLink" href="http://localhost:5183/OfficeHourSch/studentaccount" style="display:none;"></a>
-<button type="button" class="btn btn-primary position-relative" onclick="document.getElementById('myLink').click()">
-    Account
-    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
-        <span class="visually-hidden">New alerts</span>
-    </span>
-</button>
+    <button type="button" class="btn btn-primary position-relative" onclick="document.getElementById('myLink').click()">
+        Account
+        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+            <span class="visually-hidden">New alerts</span>
+        </span>
+    </button>
 
     <br />
     <br />
     <br />
-    
-    
+
+
     @if (HttpContext.Session.GetString("username") != null)
     {
 
 
-               @*Table for displaying office hours*@
+        @*Table for displaying office hours*@
 
 
 
         <table class="table table-bordered table-responsive table-hover">
             <thead>
                 <tr>
-                    
+
                     <th>Office Number:</th>
                     <th>Date: </th>
                     <th>Time: </th> 
-                    <th>Student Name:</th>
+                    <th>Qeueu length:</th>
                 </tr>
             </thead>
             <tbody>
@@ -59,12 +59,11 @@
         <form method="post">
             <button type="submit" asp-page-handler="StudentQueue">Go to Student Queue</button>
         </form>
-        
-        }
+    
 
     <br />
 
-    <p>Phillip Ruta, Anuj Passan, Arden Barrett</p>
 
     }
 
+}
