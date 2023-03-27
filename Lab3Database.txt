@@ -6,7 +6,7 @@ CREATE TABLE Meeting (meetingID int IDENTITY(1,1) PRIMARY KEY, office# nvarchar(
 
 CREATE TABLE OfficeHours (officeHoursID int IDENTITY(1,1) PRIMARY KEY, office# nvarchar(50),queue# int, dateID nvarchar(50), timeID char(50), studentName char(50), facultyID int REFERENCES Faculty(FacultyID));
 
-CREATE TABLE Notification (notificationID int IDENTITY(1,1) PRIMARY KEY, messageInfo nvarchar(50), facultyID int REFERENCES Faculty(FacultyID), studentID int REFERENCES Student(studentID), Meeting(meetingID);
+CREATE TABLE Notification (notificationID int IDENTITY(1,1) PRIMARY KEY, messageInfo nvarchar(50), facultyID int REFERENCES Faculty(FacultyID), studentID int REFERENCES Student(studentID), meetingID int REFERENCES Meeting(meetingID);
 
 
 insert into Student(fName, lName, userName,studentEmail, phone) VALUES ('Anuj', 'Passan', 'APassan', 'aPassan@edu.com','2024432134');
