@@ -28,6 +28,6 @@ insert into OfficeHours(office#, dateID, timeID, studentName, facultyID) VALUES 
 insert into OfficeHours(office#, dateID, timeID, studentName, facultyID) VALUES (8905,'2023-04-28', '2:00PM - 3:00PM', 'InputName', 3);
 insert into OfficeHours(office#, dateID, timeID, studentName, facultyID) VALUES (9005,'2023-04-28', '4:00PM - 5:00PM', 'InputName, 4);
 
-insert into Notification(messasgeInfo, facultyID, studentID) VALUES ('Professor is ready to see you!', 4,1);
+insert into Notification(messageInfo, facultyID, studentID) VALUES ('Professor is ready to see you!', 4,1);
 insert into Notification(messageInfo, facultyID, studentID) VALUES ('Professor is ready to meet' , 2,4);
 insert into Notification(messageInfo, facultyID, studentID) VALUES ('The meeting will begin shortly', 2,3); 
