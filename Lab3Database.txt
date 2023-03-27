@@ -6,6 +6,9 @@ CREATE TABLE Meeting (meetingID int IDENTITY(1,1) PRIMARY KEY, office# nvarchar(
 
 CREATE TABLE OfficeHours (officeHoursID int IDENTITY(1,1) PRIMARY KEY, office# nvarchar(50),queue# int, dateID nvarchar(50), timeID char(50), studentName char(50), facultyID int REFERENCES Faculty(FacultyID));
 
+CREATE TABLE Notifcation (notificationID int IDENTITY(1,1) PRIMARY KEY, messageInfo nvarchar(50), facultyID int REFERENCES Faculty(FacultyID), studentID int REFERENCES Student(studentID));
+
+
 insert into Student(fName, lName, userName,studentEmail, phone) VALUES ('Anuj', 'Passan', 'APassan', 'aPassan@edu.com','2024432134');
 insert into Student(fName, lName, userName, studentEmail, phone) VALUES ('Phillip', 'Ruta', 'PRuta', 'pRuta@edu.com','2024435732');
 insert into Student(fName, lName, userName, studentEmail, phone) VALUES ('Arden', 'Barrett', 'ABarrett', 'aBarrett@edu.com','7032415639');
@@ -25,4 +28,6 @@ insert into OfficeHours(office#, dateID, timeID, studentName, facultyID) VALUES 
 insert into OfficeHours(office#, dateID, timeID, studentName, facultyID) VALUES (8905,'2023-04-28', '2:00PM - 3:00PM', 'InputName', 3);
 insert into OfficeHours(office#, dateID, timeID, studentName, facultyID) VALUES (9005,'2023-04-28', '4:00PM - 5:00PM', 'InputName, 4);
 
-
+insert into Notification(messasgeInfo, facultyID, studentID) VALUES ('Professor is ready to see you!', 4,1);
+insert into Notification(messageInfo, facultyID, studentID) VALUES ('Professor is ready to meet' , 2,4);
+insert into Notification(messageInfo, facultyID, studentID) VALUES ('The meeting will begin shortly', 2,3); 
